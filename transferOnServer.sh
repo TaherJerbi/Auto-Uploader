@@ -39,5 +39,5 @@ ssh -i mydebian_key.pem -t azureuser@$ip '. ~/.bashrc;cd ~/Documents/Auto-Upload
 
 if [ $SHOULD_DEALLOCATE = 1 ]; then
     echo "**** DEALLOCATING VM ****"
-    az vm deallocate -g mydebian_group -n 
+    az vm deallocate -g mydebian_group -n mydebian 
 fi
