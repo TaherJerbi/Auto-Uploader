@@ -1,21 +1,29 @@
 # Default values of arguments
 SHOULD_START=0
-SHOULD_DEALLOCATE=0
+SHOULD_DEALLOCATE=1
 
 # Loop through arguments and process them
 for arg in "$@"
 do
     case $arg in
-        -s|--start)
-        SHOULD_START=1
-        shift # Remove --initialize from processing
-        ;;
         -d|--deallocate)
-        SHOULD_DEALLOCATE=1
+        SHOULD_DEALLOCATE=0
         shift # Remove --initialize from processing
         ;;
     esac
 done
+
+# Check if VM is up
+VAR2='"VM deallocated"'
+VAR1=`az vm list -d --query "[?name=='mydebian']"| jq ".[].powerState"`
+if [ "$VAR1" = "$VAR2" ]; then
+    echo "$VAR1"
+    SHOULD_START=1
+else
+    echo "VM already up ..."
+    SHOULD_START=0
+fi
+
 if [ $SHOULD_START = 1 ]; then
     echo "**** STARTING VM ****"
     az vm start -g mydebian_group -n mydebian 
