@@ -1,3 +1,5 @@
+# Connect to VM, send newvids and cookies.txt and remotely execute transfer.sh on newvids
+
 # Default values of arguments
 SHOULD_START=0
 SHOULD_DEALLOCATE=1
@@ -27,8 +29,8 @@ fi
 if [ $SHOULD_START = 1 ]; then
     echo "**** STARTING VM ****"
     az vm start -g mydebian_group -n mydebian 
-    echo "**** Waiting 10 seconds ... ****"
-    sleep 10
+    echo "**** Waiting 20 seconds ... ****"
+    sleep 20
 fi
 
 ip=`az vm show -d -g mydebian_group -n mydebian --query publicIps -o tsv`
