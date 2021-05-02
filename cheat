@@ -1,0 +1,4 @@
+# Parse xml response
+cat file.xml | xq . | grep d:ServerRelativeUrl | cut -d: -f 3 | cut -d, -f1 > links
+# remove quotes
+# ... | tr -d '"' 

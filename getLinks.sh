@@ -5,15 +5,15 @@ server="mohetn.sharepoint.com"
 # path=""
 # videoPath=""
 # # Download all xml responses
-# while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+while IFS='' read -r LINE || [ -n "${LINE}" ]; do
 
-# 	  site=`echo $LINE | cut -d/ -f5` 
-#     path=`echo $LINE | awk -F $server '{print $2}'`
-#     echo $server
-#     echo $site
-#     echo $path
-#     wget --cookies=on --load-cookies cookies.txt --keep-session-cookies --no-check-certificate -P ./tmp -m "https://$server/sites/$site/_api/Web/GetFolderByServerRelativePath(decodedurl='$path')/Files"
-# done < $1
+	site=`echo $LINE | cut -d/ -f5` 
+    path=`echo $LINE | awk -F $server '{print $2}'`
+    echo $server
+    echo $site
+    echo $path
+    wget --cookies=on --load-cookies cookies.txt --keep-session-cookies --no-check-certificate -P ./tmp -m "https://$server/sites/$site/_api/Web/GetFolderByServerRelativePath(decodedurl='$path')/Files"
+done < $1
 
 # Parse to get links
 # cat file.xml | xq . | grep d:ServerRelativeUrl | cut -d: -f 3 | cut -d, -f1 > links
