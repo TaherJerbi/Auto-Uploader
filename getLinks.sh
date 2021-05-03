@@ -20,7 +20,7 @@ done < $1
 find ./tmp -name 'Files*' > files
 
 while IFS='' read -r line || [ -n "${line}" ]; do 
-    cat "$line" | xq . | grep d:ServerRelativeUrl | cut -d: -f 3 | cut -d, -f1 | sed "s/\"//g" >> links
+    cat "$line" | /home/azureuser/.local/bin/xq . | grep d:ServerRelativeUrl | cut -d: -f 3 | cut -d, -f1 | sed "s/\"//g" >> links
 done <files
 rm files
     
